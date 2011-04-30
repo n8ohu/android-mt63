@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <string name="app_name">MT-63/2000</string>
+    <string name="app_name">MT63-2000</string>
+    <string name="tx">send</string>
 </resources>

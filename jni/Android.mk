@@ -16,15 +16,8 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE	:= dsp
-LOCAL_SRC_FILES	:= dsp.cpp
-
-include $(BUILD_STATIC_LIBRARY)
-
-include $(CLEAR_VARS)
-
 LOCAL_MODULE	:= mt63
-LOCAL_SRC_FILES	:= mt63.cpp
+LOCAL_SRC_FILES	:= mt63.cpp dsp.cpp
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -32,6 +25,14 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := MT63Demodulator
 LOCAL_SRC_FILES := MT63Demodulator.cpp
-LOCAL_STATIC_LIBRARIES	:= dsp mt63
+LOCAL_STATIC_LIBRARIES	:= mt63
+
+include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE	:= MT63Modulator
+LOCAL_SRC_FILES	:= MT63Modulator.cpp
+LOCAL_STATIC_LIBRARIES	:= mt63
 
 include $(BUILD_SHARED_LIBRARY)
