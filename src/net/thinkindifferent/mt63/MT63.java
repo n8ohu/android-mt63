@@ -12,13 +12,14 @@ import android.widget.TextView;
 public class MT63 extends Activity {
 	private AudioThread audioThread;
 	private Demodulator demodulator;
+	private Modulator modulator;
 	
 	class TxBtnClickListener implements OnClickListener {
 
 		@Override
 		public void onClick(View v) {
 			EditText tx_text = (EditText)findViewById(R.id.tx_text);
-			Modulator.sendText(tx_text.getText().toString());
+			modulator.sendText(tx_text.getText().toString());
 			tx_text.setText("");
 		}
 		
@@ -38,11 +39,14 @@ public class MT63 extends Activity {
     	super.onPause();
     	audioThread.stopAudio();
     	demodulator.stopDemodulator();
+    	modulator.stopModulator();
     }
     
     @Override
     public void onResume() {
     	super.onResume();
+    	modulator = new Modulator();
+    	modulator.startModulator();
     	demodulator = new Demodulator(this);
     	demodulator.startDemodulator();
     	audioThread = new AudioThread(demodulator);

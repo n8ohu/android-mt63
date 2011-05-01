@@ -40,18 +40,16 @@ public class Demodulator extends Thread {
 	
 	public void run() {
 		while(running) {
-			if(!sampleQueue.isEmpty()) {
-				String text = "";
-				boolean success = false;
-				while(!success){
-					try {
-						text = processAudio(sampleQueue.take());
-						success = true;
-					} catch (InterruptedException e) { }
-				}
-				if(text.length() > 0)
-					parent.runOnUiThread(new TextViewUpdater(text));
+			String text = "";
+			boolean success = false;
+			while(!success){
+				try {
+					text = processAudio(sampleQueue.take());
+					success = true;
+				} catch (InterruptedException e) { }
 			}
+			if(text.length() > 0)
+				parent.runOnUiThread(new TextViewUpdater(text));
 		}
 	}
 	
@@ -67,7 +65,7 @@ public class Demodulator extends Thread {
 			try {
 				this.join();
 				break;
-			} catch (InterruptedException e) { }
+			} catch(InterruptedException e) { }
 		}
 	}
 	
